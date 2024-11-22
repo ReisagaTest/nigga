@@ -54,6 +54,11 @@ local Tab8 = Window:MakeTab({
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
+
+SaveDick = {
+    ["Select Weapon"] = "Melee",
+    ["Tween Speed"] = 180
+}
 --polayxiide
 if PlaceId == 2753915549 then
     Old_World = true
@@ -62,7 +67,7 @@ elseif PlaceId == 4442272183 then
 elseif PlaceId == 7449423635 then
     Third_World = true
 else
-    print("Not support")
+    plr:Kick("Du ma may")
 end
 ----Leoveosave
 function LoadSettings()
