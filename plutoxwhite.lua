@@ -62,7 +62,7 @@ elseif PlaceId == 4442272183 then
 elseif PlaceId == 7449423635 then
     Third_World = true
 else
-    plr:Kick("Not Support")
+    game:GetService("Players").LocalPlayer:Kick("not gAypport")
 end
 ----Leoveosave
 function LoadSettings()
@@ -484,13 +484,11 @@ function SkipLevel()
     if plr.Data.Level.Value >= 1 and plr.Data.Level.Value <= 29 then
         if DetectMob("Sky Bandit") then
             repeat wait()
-            SetTitle("Killing Mobs")
                 KillMob("Sky Bandit", function() return SaveDick["Level Farm"] == false or IsStackFarm or plr.Data.Level.Value >= 30 end)
             until SaveDick["Level Farm"] == false or IsStackFarm or plr.Data.Level.Value >= 30 or not DetectMob("Sky Bandit")
         else
             for i, v in pairs(GetMobSpawnList(GetMobName("Sky Bandit"))) do
                 repeat wait()
-                SetTitle("Waitting Mobs")
                     Tween(v.CFrame * CFrame.new(0, 15, 0))
                 until DetectMob("Sky Bandit") or SaveDick["LevelFarm"] == false or IsStackFarm or plr.Data.Level.Value >= 30 or GetDistance(v.Position) <= 30
                 NoClip = false
@@ -499,13 +497,11 @@ function SkipLevel()
     elseif plr.Data.Level.Value >= 30 and plr.Data.Level.Value <= 49 then
         if DetectMob("Shanda") then
             repeat wait()
-            SetTitle("Killing Mobs")
                 KillMob("Shanda", function() return SaveDick["LevelFarm"] == false or IsStackFarm or plr.Data.Level.Value >= 50 end)
             until SaveDick["LevelFarm"] == false or IsStackFarm or plr.Data.Level.Value >= 50 or not DetectMob("Shanda")
         else
             for i, v in pairs(GetMobSpawnList(GetMobName("Shanda"))) do
                 repeat wait()
-                    SetTitle("Waitting Mobs")
                     Tween(v.CFrame * CFrame.new(0, 15, 0))
                 until DetectMob("Shanda") or SaveDick["LevelFarm"] == false or IsStackFarm or plr.Data.Level.Value >= 50 or GetDistance(v.Position) <= 30
             end
@@ -535,7 +531,6 @@ function SkipLevel()
                                 if v:FindFirstChild("Humanoid").Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
                                     if plr.PlayerGui.Main.PvpDisabled.Visible == false then
                                         repeat wait()
-                                            SetTitle("Killing Players ".. v.Name)
                                             v.HumanoidRootPart.Size = Vector3.new(30, 30, 30)
                                             Tween(v.HumanoidRootPart.CFrame * CFrame.new(math.random(0, 2), math.random(0, 2), math.random(0, 2)))
                                             EquipWeapon()
@@ -571,13 +566,11 @@ spawn(function()
         if killshanda then
             if DetectMob("Shanda") then
                 repeat wait()
-                    SetTitle("Killing Mobs")
                     KillMob("Shanda", function() return SaveDick["Level Farm"] == false or IsStackFarm or plr.Data.Level.Value >= 300 or killshanda == false end)
                 until  SaveDick["Level Farm"]  or IsStackFarm or killshanda == false or plr.Data.Level.Value >= 300 or not DetectMob("Shanda")
             else
                 for i, v in pairs(GetMobSpawnList(GetMobName("Shanda"))) do
                     repeat wait()
-                        SetTitle("Waiting Mobs")
                         Tween(v.CFrame * CFrame.new(0, 15, 0))
                     until DetectMob("Shanda") or SaveDick["Level Farm"] == false or IsStackFarm or killshanda == false or plr.Data.Level.Value >= 300 or GetDistance(v.Position) <= 30
                 end
@@ -1335,7 +1328,6 @@ function LevelFarm()
                         if v.Name == MobLevel1OrMobLevel2() then
                             if v:FindFirstChild("HumanoidRootPart") and v.Parent and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
                                 repeat wait()
-                                    SetTitle("Doing Auto Farm Bypass")
                                     KillMob(v.Name, function() 
                                         return SaveDick["Level Farm"] == false or IsStackFarm or 
                                         not plr.PlayerGui.Main:FindFirstChild("Quest").Visible 
@@ -1347,7 +1339,6 @@ function LevelFarm()
                 elseif not MobLevel1OrMobLevel2() then
                     for i, v in pairs(GetMobSpawnList(GetMob())) do
                         repeat wait()
-                            SetTitle("Waitting Mob ".. CheckNameMobDoubleQuest() .. "")
                             NoClip = true
                             ToBypass(v.CFrame * CFrame.new(0, 15, 0))
                         until MobLevel1OrMobLevel2() or SaveDick["Auto Level"] == false or IsStackFarm or not plr.PlayerGui.Main:FindFirstChild("Quest").Visible or GetDistance(v.Position) <= 30 or IsStackFarm
@@ -1376,7 +1367,6 @@ function BonesFarm()
                 if table.find(TableMobBones, v.Name) then
                     if v:FindFirstChild("HumanoidRootPart") and v.Parent and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
                         repeat wait()
-                            SetTitle("Farm Mob ".. v.Name)
                             KillMob(v.Name, function() return SaveDick["Auto Bones"]  == false end)
                         until SaveDick["Auto Bones"]  == false or IsStackFarm or not v.Parent or not v:FindFirstChild("Humanoid") or v:FindFirstChild("Humanoid").Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or IsStackFarm
                     end
@@ -1387,7 +1377,6 @@ function BonesFarm()
                 if table.find(TableMobBones, v.Name) then
                     repeat wait()
                         NoClip = true
-                        SetTitle("Waitting Mob ".. v.Name)
                         ToBypass(v.CFrame * CFrame.new(0, 15, 0))
                     until DetectMob(TableMobBones) or SaveDick["Auto Bones"] == false or IsStackFarm or GetDistance(v.Position) <= 30
                     NoClip = false
@@ -1410,7 +1399,6 @@ function CakeFarm()
         local v = DetectMob2(TableCakePrince)
         if not CheckGlassCake() and v then
             repeat wait()
-                SetDescStatus("Killing Mob ".. v.Name)
                 KillMob(v.Name, SaveDick["Auto Kata"]  == false)
             until CheckGlassCake() or not DetectMob2(TableCakePrince) or SaveDick["Auto Kata"]  == false or IsStackFarm or IsStackFarm
         elseif CheckGlassCake() and not DetectMob2(TableCakePrince) then
