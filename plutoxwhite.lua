@@ -56,13 +56,13 @@ local Tab8 = Window:MakeTab({
 })
 --polayxiide
 if PlaceId == 2753915549 then
-    Old_World = false
+    Old_World = true
 elseif PlaceId == 4442272183 then
-    New_World = false
+    New_World = true
 elseif PlaceId == 7449423635 then
-    Third_World = false
+    Third_World = true
 else
-    game:GetService("Players").LocalPlayer:Kick("not gAypport")
+    print("Not support")
 end
 ----Leoveosave
 function LoadSettings()
