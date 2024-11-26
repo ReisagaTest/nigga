@@ -1734,6 +1734,8 @@ function CheckBossQuest()
 	end
 end
 
+local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/Jxereas/UI-Libraries/main/notification_gui_library.lua", true))()
+
 local Luxury = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
@@ -4688,6 +4690,7 @@ spawn(function()
 		while wait() do
 			if AutoObservation then
 				if game:GetService("Players").LocalPlayer.VisionRadius.Value >= 3000 then
+					local ahasd = Notification.new("success", "Luxury Hub", "Observation Range : Max") 
 					ahasd:deleteTimeout(5)
 					wait(2)
 				else
@@ -4937,6 +4940,9 @@ Tabs.Stats:AddButton({
 	Description = "and choose mode 1 or 2",
 	Callback = function()
 		if SelectKaitunPicMode == "" then
+			local notif = Notification.new("warning", "Alert", "Pls Select Mode Picture")
+			notif:deleteTimeout(3)
+		end
 
 		do ui = game:GetService("CoreGui") if ui:FindFirstChild("LayoutKaitun") then ui:FindFirstChild("LayoutKaitun"):Destroy() end end
 
@@ -10328,6 +10334,12 @@ V4Auta:OnChanged(function(starts)
 										fask.wait(1)
 									end
 								end
+
+							else
+								local notif = Notification.new("warning", "Alert", "U Party Not In Server") -- Args(<string> Type, <string> Heading, <string> Body, <boolean?> AutoRemoveNotif, <number?> AutoRemoveTime, <function?> OnCloseFunction)
+								notif:deleteTimeout(3)
+								fask.wait(3)
+							end
 						elseif table.find(SelectPartyV4,game.Players.LocalPlayer.Name) then
 							if CheckPlayerInServ(SelectPartyV4) and CheckPlayerInServ({SelectHostV4}) then
 								if havetrial() then
@@ -10373,11 +10385,21 @@ V4Auta:OnChanged(function(starts)
 									end
 								end
 							else
+								local notif = Notification.new("warning", "Alert", "U Party/Host Not In Server") -- Args(<string> Type, <string> Heading, <string> Body, <boolean?> AutoRemoveNotif, <number?> AutoRemoveTime, <function?> OnCloseFunction)
+								notif:deleteTimeout(3)
+								fask.wait(3)
+							end
+						else
 							table.foreach(SelectPartyV4,print)
+
+							local notif = Notification.new("warning", "Notify!!", "U Not Have Party") -- Args(<string> Type, <string> Heading, <string> Body, <boolean?> AutoRemoveNotif, <number?> AutoRemoveTime, <function?> OnCloseFunction)
 							notif:deleteTimeout(3)
 							fask.wait(3)
 						end
 					elseif CheckRaceup == 5 then
+						local notif = Notification.new("success", "Notify!!", "U Race Max") -- Args(<string> Type, <string> Heading, <string> Body, <boolean?> AutoRemoveNotif, <number?> AutoRemoveTime, <function?> OnCloseFunction)
+						notif:deleteTimeout(3)
+						fask.wait(4)
 					elseif CheckRaceup % 2 == 0 then
 						if game:GetService("Players")["LocalPlayer"].Character.RaceTransformed.Value == true then
 							local me = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame
