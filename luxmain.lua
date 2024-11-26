@@ -1,5 +1,3 @@
-print('fuxk')
-
 if not game:IsLoaded() then game.Loaded:Wait() end
 local fask = task 
 setreadonly(fask,false)
