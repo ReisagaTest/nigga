@@ -294,156 +294,74 @@ if not pcall(function() readfile(FolderName.."/" .. "Jobid.json") end) then
     writefile(FolderName.."/" .. "Jobid.json", game:GetService("HttpService"):JSONEncode(DefaultSettingHopServer))
 end
 --tween
-function poscheckspawn(pos)
-    dist = math.huge
-    local name
-    for i,v in next,game:GetService("Workspace")["_WorldOrigin"].PlayerSpawns.Pirates:GetChildren() do
-        if v:IsA("Model") then
-            local magnitude = (v.Part.Position - pos).magnitude
-            if magnitude < dist then
-                dist = magnitude
-                name = v
-            end
-        end
-    end
-    return name
-end
-if game.PlaceId == 7449423635 then 
-    TableLocations = {
-        ["Caslte On The Sea"] = Vector3.new(-5058.77490234375, 314.5155029296875, -3155.88330078125),
-        ["Hydra"] = Vector3.new(5756.83740234375, 610.4240112304688, -253.9253692626953),
-        ["Mansion"] = Vector3.new(-12463.8740234375, 374.9144592285156, -7523.77392578125),
-        ["Great Tree"] = Vector3.new(5314.58203125, 25.419387817382812, -125.94227600097656),
-        ["Temple Clock"] = Vector3.new(28282.5703125, 14896.8505859375, 105.1042709350586),
-    }
-elseif game.PlaceId == 2753915549 then
-    TableLocations = {
-        ["FishmanSea1"] =  game:GetService("Workspace").Map.TeleportSpawn.EntrancePoint.Position,
-        ["Island Sky 2"] =   game:GetService("Workspace").Map.SkyArea2.PathwayHouse.EntrancePoint.Position,
-        ["Island Sky 1"] = game:GetService("Workspace").Map.SkyArea1.PathwayTemple.ExitPoint.Position,
-    }
-elseif game.PlaceId == 4442272183 then
-    TableLocations = {
-        ["GhostShipInterior"] = game:GetService("Workspace").Map.GhostShipInterior.TeleportSpawn.Position
-    }
-end
-function toTarget(pos, targetPos, targetCFrame,TpInstant)
-    if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") and game.Players.LocalPlayer.Character.Humanoid.Sit then
-        getgenv().noclip = false
-        if getgenv().Tween then
-            getgenv().Tween:Pause()
-            getgenv().Tween:Cancel()
-        end
-        game.Players.LocalPlayer.Character.Humanoid.Sit = false
-        game.Players.LocalPlayer.Character.Humanoid.Jump = true
-        plr.Character.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame*CFrame.new(0,10,0)
-        return 
-    end
-    local aaa = Settings["Tween Speed"] or 160
-    local tween_s = game:service"TweenService"
-    local info = TweenInfo.new((targetPos - pos).Magnitude/aaa, Enum.EasingStyle.Quad)
-    if game.PlaceId == 7449423635 and  (targetPos-Vector3.new(28609.392578125, 14896.533203125, 106.4216537475586)).Magnitude > 3000 and  (Vector3.new(28609.392578125, 14896.533203125, 106.4216537475586)-plr.Character.HumanoidRootPart.Position).Magnitude <= 3000 then 
-        getgenv().Tween = tween_s:Create(game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart"), TweenInfo.new((Vector3.new(28609.392578125, 14896.533203125, 106.4216537475586) - plr.Character.HumanoidRootPart.Position).Magnitude/aaa, Enum.EasingStyle.Quad), {CFrame = CFrame.new(28609.392578125, 14896.533203125, 106.4216537475586)})
-        getgenv().noclip = true
-        getgenv().Tween:Play()
-        if (Vector3.new(28609.392578125, 14896.533203125, 106.4216537475586)-plr.Character.HumanoidRootPart.Position).Magnitude < 8 then 
-            game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("CommF_"):InvokeServer("RaceV4Progress","Check")
-            game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("CommF_"):InvokeServer("RaceV4Progress","TeleportBack")
-            if getgenv().Tween then
-                getgenv().Tween:Pause()
-                getgenv().Tween:Cancel()
-            end
-        end
-        return
-    end
-    if game.PlaceId == 2753915549 and (targetPos-game:GetService("Workspace").Map.TeleportSpawn.EntrancePoint.Position).Magnitude > 3000 and  (game:GetService("Workspace").Map.TeleportSpawn.EntrancePoint.Position-plr.Character.HumanoidRootPart.Position).Magnitude <= 3000 then
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(3864.6884765625, 6.736950397491455, -1926.214111328125))
-        return 
-    elseif game.PlaceId == 4442272183 and (targetPos-game:GetService("Workspace").Map.GhostShipInterior.TeleportSpawn.Position).Magnitude > 3000 and  (game:GetService("Workspace").Map.GhostShipInterior.TeleportSpawn.Position-plr.Character.HumanoidRootPart.Position).Magnitude <= 3000 then
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",game:GetService("Workspace").Map.GhostShip.TeleportSpawn.Position)
-        return 
-    end
-    if TableLocations then
-        for i,v2 in pairs(TableLocations) do
-            if  (targetPos-v2).Magnitude <= 3000 and  (targetPos-plr.Character.HumanoidRootPart.Position).Magnitude >= 3000 then
-                if getgenv().Tween then
-                    getgenv().Tween:Pause()
-                    getgenv().Tween:Cancel()
-                end
-                args = {
-                    "requestEntrance",
-                    v2,
-                }
-                game.ReplicatedStorage.Remotes.CommF_:InvokeServer(unpack(args))
-                return 
-            end
-        end
-    end
-    if (targetPos-pos).Magnitude >= 3000 and Settings["Reset Teleport"] and poscheckspawn(targetPos).Name ~= game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value then
-        if getgenv().Tween then
-            getgenv().Tween:Pause()
-            getgenv().Tween:Cancel()
-        end
-        plr.Character.LastSpawnPoint.Disabled = true
-        local TimeReset = tick()
+function BypassTP(targetpos)
+    wait(1)
+    pcall(function()
         repeat task.wait()
-            plr.Character.LastSpawnPoint.Disabled = true
-            game.ReplicatedStorage.Remotes.CommF_:InvokeServer("SetLastSpawnPoint", poscheckspawn(targetPos).Name)
-            plr.Character.HumanoidRootPart.CFrame = poscheckspawn(targetPos).Part.CFrame
-            if tick()-TimeReset >= 3 and plr.Character.Humanoid.Health > 0 then
-                plr.Character.Humanoid.Health = 0
-                task.wait()
-                TimeReset = tick()
-            end
-        until poscheckspawn(targetPos).Name == game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value or not OrionLib.Flags["Reset Teleport"].Value
-        plr.Character.Humanoid.Health = 0
+            game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):ChangeState(15)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = GetBypassCFrame(targetpos)
+        until game.Players.LocalPlayer.Character.PrimaryPart.CFrame == GetBypassCFrame(targetpos) or getgenv().BypassTeleport == false
+        game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid", 9):ChangeState(15)
+        game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(GetBypassCFrame(targetpos))
+        wait(0.1)
+        game.Players.LocalPlayer.Character.Head:Destroy()
         repeat task.wait()
-        until plr.Character:FindFirstChild("Humanoid") and plr.Character.Humanoid.Health > 0 
-        return
+        until game.Players.LocalPlayer.Character:FindFirstChild("Humanoid").Health <= 0
+        repeat  task.wait()
+        until game.Players.LocalPlayer.Character:FindFirstChild("Head")
+        wait(1)
+    end)
+end
+
+
+function CheckPlayerBackpack(item)
+    for r, v in next, plr.Backpack:GetChildren() do
+        if tostring(v) == item then
+            return v
+        end
     end
-    if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") and plr.Character.Humanoid.Health > 0 then
-        if (targetPos-pos).Magnitude <= 200 and not TpInstant then
-            if getgenv().Tween then
-                getgenv().Tween:Pause()
-                getgenv().Tween:Cancel()
-            end
-            getgenv().noclip = true
-            plr.Character.HumanoidRootPart.CFrame = targetCFrame
-        else
-            local a = Vector3.new(0,plr.Character:FindFirstChild("HumanoidRootPart").Position.Y,0) 
-            local b = Vector3.new(0,game:GetService("Workspace").Map["WaterBase-Plane"].Position.Y,0)
-            if (a-b).Magnitude <= 60 then
-                plr.Character.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame*CFrame.new(0,20,0)
-            end
-            getgenv().Tween = tween_s:Create(game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart"), info, {CFrame = targetCFrame})
-            getgenv().noclip = true
-            getgenv().Tween:Play()
+    for r, v in next, plr.Character:GetChildren() do
+        if tostring(v) == item then
+            return v
         end
     end
 end
 
-function sizepart(v)
-    v.HumanoidRootPart.CanCollide = false
-    if syn or Fluxus or Delta then
-        v.Humanoid:ChangeState(11)
-    else
-        for i,x in next,v:GetDescendants() do 
-            if (x:IsA("Part") or x:IsA("MeshPart")) and not string.find(v.Name,"Leg") and  x.CanCollide then 
-                x.CanCollide = false 
-            end
-        end
-    end
-    if not v.HumanoidRootPart:FindFirstChild("vando") then
-        local lock = Instance.new("BodyVelocity")
-        lock.Parent = v
-        lock.Name = "vando"
-        lock.MaxForce = Vector3.new(100000, 100000, 100000)
-        lock.Velocity = Vector3.new(0, 0, 0)
-    end
+function requestEntrance(b)
+    args = {"requestEntrance", b}
+    game.ReplicatedStorage.Remotes.CommF_:InvokeServer(unpack(args))
+    plr.Character.HumanoidRootPart.CFrame = CFrame.new(plr.Character.HumanoidRootPart.Position.X, plr.Character.HumanoidRootPart.Position.Y + 80, plr.Character.HumanoidRootPart.Position.Z)
+    block.CFrame = CFrame.new(block.Position.X, block.Position.Y + 80, block.Position.Z)
 end
-game:GetService("RunService").RenderStepped:connect(function()
-    sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-end)
+
+function Tween(targetcframe)
+    pcall(function()
+        local Distance = (targetcframe.Position - plr.Character.HumanoidRootPart.Position).Magnitude
+        local PortalPos = GetPortal(targetcframe)
+        plr.Character.HumanoidRootPart.CFrame = CFrame.new(plr.Character.HumanoidRootPart.Position.X, targetcframe.Y, plr.Character.HumanoidRootPart.Position.Z)
+        block.CFrame = CFrame.new(block.Position.X, targetcframe.Y, block.Position.Z)
+        if block and block.Parent == workspace then
+            local tweenInfo = TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear)
+            tween = game:GetService("TweenService"):Create(block, tweenInfo, {CFrame = targetcframe})
+            if Distance <= 250 then
+                tween:Cancel()
+                NoClip = true
+                plr.Character.HumanoidRootPart.CFrame = targetcframe
+                block.CFrame = targetcframe
+            end
+            if PortalPos and Distance >= 2500 and (targetcframe.Position - PortalPos).Magnitude <= 1000 then
+                requestEntrance(PortalPos)
+            end
+            if Distance >= 4000 and (targetcframe.Position - GetBypassCFrame(targetcframe).Position).Magnitude < 1000 and not CheckPlayerBackpack("God's Chalice") and not CheckPlayerBackpack("Sweet Chalice") and not CheckPlayerBackpack("Fist Of Darkness") then
+                BypassTP(targetcframe)
+            end
+            if plr.Character.Humanoid.Sit == true then
+                plr.Character.Humanoid.Sit = false
+            end
+            tween:Play()
+        end
+    end)
+end
 ---
 local plr = game.Players.LocalPlayer
 local block = Instance.new("Part", workspace)
@@ -502,9 +420,9 @@ end)
 
 spawn(function()
     while wait() do
-        if getgenv().Tween and tween.PlaybackState == Enum.PlaybackState.Playing then
+        if tween and tween.PlaybackState == Enum.PlaybackState.Playing then
             NoClip = true
-        elseif getgenv().Tween then
+        elseif tween then
             NoClip = false
         end
     end
