@@ -38,9 +38,7 @@ do -- Team Script
 		end
 		wait(1)
 	until game.Players.LocalPlayer.Team
-	repeat 
-		wait() 
-	until game.Players.LocalPlayer.Character
+	repeat wait() until game.Players.LocalPlayer.Character
 end
 
 local SettingsGameData = {}
