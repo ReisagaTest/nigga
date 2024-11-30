@@ -1,3 +1,14 @@
+for _, v in ipairs(game:GetService("CoreGui"):GetChildren()) do
+    if v.Name == "Check Status" or v.Name == "redz Library V5" or v.Name == "Check" then
+        v:Destroy()
+    elseif v:IsA("ScreenGui") then
+        local frame = v:FindFirstChild("Frame")
+        if frame and frame:FindFirstChild("UIListLayout") then
+            v:Destroy()
+        end
+    end
+end
+
 local UserInputService = game:GetService("UserInputService")
 
 local ScreenGui = Instance.new("ScreenGui")
@@ -1874,7 +1885,7 @@ function redzlib:MakeWindow(Configs)
 				Size = UDim2.new(1, -14, 0, 16),
 				AnchorPoint = Vector2.new(0.5, 1),
 				Position = UDim2.new(0.5, 0, 1, -7),
-				Text = "Join Rise Hub Discord",
+				Text = "Ohio",
 				Font = Enum.Font.GothamBold,
 				TextSize = 12,
 				TextColor3 = Color3.fromRGB(220, 220, 220),
@@ -1893,7 +1904,7 @@ function redzlib:MakeWindow(Configs)
 					TextColor3 = Color3.fromRGB(150, 150, 150)
 				})task.wait(5)
 				SetProps(JoinButton, {
-					Text = "Join Rise Hub Discord",
+					Text = "Skibidi",
 					BackgroundColor3 = Color3.fromRGB(50, 150, 50),
 					TextColor3 = Color3.fromRGB(220, 220, 220)
 				})ClickDelay = false
@@ -1917,7 +1928,7 @@ function redzlib:MakeWindow(Configs)
     L_51_.Size = UDim2.new(0, 50, 0, 50)
     L_51_.Position = UDim2.new(0.1, 0, 1, - 250)
     L_51_.BackgroundTransparency = 1
-    L_51_.Image = "rbxassetid://83429535930475"
+    L_51_.Image = "rbxassetid://114415669637912"
     L_54_.Parent = L_51_
     L_54_.CornerRadius = UDim.new(1, 0)
     L_55_.Parent = L_51_
