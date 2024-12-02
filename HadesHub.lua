@@ -4826,11 +4826,9 @@ spawn(function()
                                         topos(CakePos)
                                     end
                                     UnEquipWeapon(_G.SelectWeapon)
-                                    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,
-                                            workspace.Map.CakeLoaf.BigMirror.Main, 0)
+                                    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,workspace.Map.CakeLoaf.BigMirror.Main, 0)
                                         wait(0.1)
-                                        firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,
-                                            workspace.Map.CakeLoaf.BigMirror.Main, 1)
+                                    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,workspace.Map.CakeLoaf.BigMirror.Main, 1)
                                 end
                             end
                         end
@@ -4910,10 +4908,10 @@ task.spawn(function()
                             end
                             UnEquipWeapon(_G.SelectWeapon)
                             firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,
-                                            workspace.Map.CakeLoaf.BigMirror.Main, 0)
+workspace.Map.CakeLoaf.BigMirror.Main, 0)
                                         wait(0.1)
-                                        firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,
-                                            workspace.Map.CakeLoaf.BigMirror.Main, 1)
+                             firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,
+workspace.Map.CakeLoaf.BigMirror.Main, 1)
                         end
                     end
                 end
