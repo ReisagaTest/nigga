@@ -2418,6 +2418,7 @@ spawn(function()
             firetouchinterest(v.TouchInterest)
         end
     end
+    
 _G.TargTrial = nil
 function targettrial()
     if _G.TargTrial ~= nil then return end
@@ -2467,8 +2468,7 @@ function GetCurrentBlade()
 	return T;
 end;
 function AttackPlayersNotHeadd()
-	if not _G.AutoFarmFruitMastery or (not _G.AutoFarmGunMastery) then
-		if _G.AutoKillTial or game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") then
+		if game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") then
 			local U = RBlade.activeController;
 			for h = 1, 1 do
 				local V = (require(game.ReplicatedStorage.CombatFramework.RigLib)).getBladeHits(PBlade.Character, {
@@ -2531,8 +2531,8 @@ function GetCurrentBlade()
     return ret
 end
 
-function AttackPlayersInTrial()
-    if _G.AutoKillTial or game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") then
+function AttackKata()
+    if game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") then
         local AC = CbFw2.activeController
         if not AC or not AC.attack then return end
         local bladeHits = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
@@ -4792,6 +4792,8 @@ spawn(function()
                                         if v.Name == "Cookie Crafter" or v.Name == "Cake Guard" or v.Name == "Baking Staff" or v.Name == "Head Baker" then
                                             if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
                                                 repeat task.wait()
+                                                    AttackKata()
+                                                    AttackPlayersNotHeadd()
                                                     AutoHaki()
                                                     EquipWeapon(_G.SelectWeapon)
                                                     v.HumanoidRootPart.CanCollide = false
@@ -4851,6 +4853,8 @@ task.spawn(function()
                               topos(CFrame.new(-2152.46533, 69.9830399, -12399.1357, 0.998845279, -1.36106415e-08, 0.0480427258, 1.75027015e-08, 1, -8.05917963e-08, -0.0480427258, 8.13396142e-08, 0.998845279)) 
                                   wait(3)
                                 repeat task.wait()
+                                    AttackKata()
+                                    AttackPlayersNotHeadd()
                                     AutoHaki()
                                     EquipWeapon(_G.SelectWeapon)
                                     v.HumanoidRootPart.CanCollide = false
