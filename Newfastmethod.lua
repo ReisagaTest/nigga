@@ -1,5 +1,9 @@
+getgenv().FastZure = Value
 
-        DamageAura = true;
+
+
+
+    DamageAura = true;
 	Fast = false;
 	NeedAttacking = false;
 	if JKLL then
@@ -26,11 +30,11 @@
 		local CurrentAllMob = {};
 		local canHits = {};
 		require(R.Util.CameraShaker):Stop();
-		PC = require(selff.PlayerScripts.CombatFramework.Particle);
-		RL = require(R.CombatFramework.RigLib);
-		DMG = require(selff.PlayerScripts.CombatFramework.Particle.Damage);
-		RigC = getupvalue(require(selff.PlayerScripts.CombatFramework.RigController),2);
-		Combat =  getupvalue(require(selff.PlayerScripts.CombatFramework),2);
+		PC = print(require(game:GetService("ReplicatedStorage").ClientComponents.WeaponToolClient).Particle);
+		RL = print(require(game:GetService("ReplicatedStorage").ClientComponents.WeaponToolClient).RigLib);
+		DMG = print(require(game:GetService("ReplicatedStorage").ClientComponents.WeaponToolClient).Particle.Damage);
+		RigC = print(require(game:GetService("ReplicatedStorage").ClientComponents.WeaponToolClient.RigController),2);
+		Combat =  print(require(game:GetService("ReplicatedStorage").ClientComponents.WeaponToolClient),2);
 		task.spawn(function()
 			local stacking = 0;
 			local printCooldown = 0;
