@@ -30,11 +30,7 @@ getgenv().FastZure = Value
 		local CurrentAllMob = {};
 		local canHits = {};
 		require(R.Util.CameraShaker):Stop();
-		PC = print(require(game:GetService("ReplicatedStorage").ClientComponents.WeaponToolClient).Particle);
-		RL = print(require(game:GetService("ReplicatedStorage").ClientComponents.WeaponToolClient).RigLib);
-		DMG = print(require(game:GetService("ReplicatedStorage").ClientComponents.WeaponToolClient).Particle.Damage);
-		RigC = print(require(game:GetService("ReplicatedStorage").ClientComponents.WeaponToolClient.RigController),2);
-		Combat =  print(require(game:GetService("ReplicatedStorage").ClientComponents.WeaponToolClient),2);
+		var99.Length / (var99:GetAttribute("SpeedMult") or 1) * any_GetAttackCancelMultiplier_result1_upvr
 		task.spawn(function()
 			local stacking = 0;
 			local printCooldown = 0;
@@ -76,7 +72,7 @@ getgenv().FastZure = Value
 			end;
 		end);
 		local shared = getgenv();
-		local Data = Combat;
+		local Data = var99.Length;
 		local Blank = function() end;
 		local RigEvent = R.RigControllerEvent;
 		local Validator = R.Remotes.Validator;
@@ -91,7 +87,7 @@ getgenv().FastZure = Value
 		local resetCD = function()
 			local WeaponName = Controller.currentWeaponModel.Name;
 			local Cooldown = {
-				combat = 0.07
+				AttackCD = 0.07
 			};
 			AttackCD = tick() + (fucker and Cooldown[WeaponName:lower()] or fucker or 0.285) + ((TryLag/MaxLag)*0.3);
 			RigEvent.FireServer(RigEvent,"weaponChange",WeaponName);
@@ -119,7 +115,7 @@ getgenv().FastZure = Value
 			end;
 		end;
 		task.spawn(function()
-			local Data = Combat;
+			local Data = var99.Length;
 			local Blank = function() end;
 			local RigEvent = R.RigControllerEvent;
 			local Animation = Instancen("Animation");
@@ -133,7 +129,7 @@ getgenv().FastZure = Value
 			local resetCD = function()
 				local WeaponName = Controller.currentWeaponModel.Name;
 				local Cooldown = {
-					combat = 0.07;
+					AttackCD = 0.07;
 				}
 				AttackCD = tick() + (fucker and Cooldown[WeaponName:lower()] or fucker or 0.285) + ((TryLag/MaxLag)*0.3);
 				RigEvent.FireServer(RigEvent,"weaponChange",WeaponName);
