@@ -1,9 +1,5 @@
-getgenv().FastZure = Value
 
-
-
-
-    DamageAura = true;
+        DamageAura = true;
 	Fast = false;
 	NeedAttacking = false;
 	if JKLL then
